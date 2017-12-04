@@ -95,6 +95,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     questionResponse.showView().fields([
      // ...
+     // faltten object
      nga.field('response','template'),
      nga.field('response', 'embedded_list') // Define a 1-N relationship with the (embedded) comment entity
          .targetFields([ // which comment fields to display in the datagrid / form
