@@ -11,11 +11,11 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
   question.listView().fields([
       nga.field('body'),
       nga.field('active','boolean'),nga.field('isMultiSelect','boolean'),
-      // nga.field('answers', 'embedded_list') // Define a 1-N relationship with the (embedded) comment entity
-      //     .targetFields([ // which comment fields to display in the datagrid / form
-      //         nga.field('body').label('Answer body'),
-      //         nga.field('value').label('Value')
-      //     ]),
+      nga.field('answers', 'embedded_list') // Define a 1-N relationship with the (embedded) comment entity
+          .targetFields([ // which comment fields to display in the datagrid / form
+              nga.field('body').label('Answer body'),
+              nga.field('value').label('Value')
+          ]),
 
     ]);
 ///
@@ -85,32 +85,39 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
       nga.field('response.first_name').label("First Name"),
       nga.field('response.email').label("Email"),
       nga.field('response.age').label("Age"),
-      nga.field('response.id').label("Id"),
+      nga.field('response.id').label("Response ID"),
 
       nga.field('question.body').label("Question"),
       nga.field('answer.body').label("Answer"),
+      nga.field('custom_action')
+          .label('Custom YAY')
+          .template('<send-email post = "entry"></send-email>')
 
     ]);
     questionResponse.listView().listActions(['show','edit','delete']);
 
-    questionResponse.showView().fields([
-     // ...
-     // faltten object
-     nga.field('response','template'),
-     nga.field('response', 'embedded_list') // Define a 1-N relationship with the (embedded) comment entity
-         .targetFields([ // which comment fields to display in the datagrid / form
-           nga.field('first_name').label("First Name"),
-           nga.field('email').label("Email"),
-           nga.field('age').label("Age"),
-           nga.field('id').label("Id"),
-
-         ]),
-     nga.field('question.body').label("Question"),
-     nga.field('answer.body').label("Answer"),
-     nga.field('custom_action')
-         .label('Custom YAY')
-         .template('<send-email post = "entry"></send-email>')
-      ]);
+    // questionResponse.showView().fields([
+    //  // ...
+    //  // faltten object
+    //  // nga.field('response','template'),
+    //  // nga.field('response', 'embedded_list') // Define a 1-N relationship with the (embedded) comment entity
+    //  //     .targetFields([ // which comment fields to display in the datagrid / form
+    //  //       nga.field('first_name').label("First Name"),
+    //  //       nga.field('email').label("Email"),
+    //  //       nga.field('age').label("Age"),
+    //  //       nga.field('id').label("Id"),
+    //  //
+    //  //     ]),
+    //  nga.field('response.first_name').label("First Name"),
+    //  nga.field('response.email').label("Email"),
+    //  nga.field('response.age').label("Age"),
+    //  nga.field('response.id').label("Id"),
+    //  nga.field('question.body').label("Question"),
+    //  nga.field('answer.body').label("Answer"),
+    //  nga.field('custom_action')
+    //      .label('Custom YAY')
+    //      .template('<send-email post = "entry"></send-email>')
+    //   ]);
 
 
   admin.addEntity(question);
